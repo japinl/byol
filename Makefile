@@ -1,18 +1,21 @@
 CC = gcc
 CFLAGS = -std=c99 -Wall
 LIBS = -ledit
+BIN = prompt parsing
 
 .PHONY: all
 
-all: prompt
+all: $(BIN)
 
 prompt: prompt.o
 	$(CC) -o $@ $^ $(LIBS)
+parsing: parsing.o mpc.o
+	$(CC) -o $@ $^ $(LIBS)
 
-prompt.o: prompt.c
+*.o: *.c
 	$(CC) $(CFLAGS) -c $<
 
 .PHONY: clean
 
 clean:
-	rm *.o prompt
+	rm *.o $(BIN)
